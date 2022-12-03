@@ -1,10 +1,10 @@
-//var mySocket = new WebSocket("ws://140.238.155.132:8080/webSocket");
 var cont = 0;
 var unaFicha;
 
 let idClient = localStorage.getItem("idClient");
 
-var mySocket = new WebSocket("ws://localhost:8080/webSocket/"+idClient);
+var mySocket = new WebSocket("ws://140.238.155.132:8080/webSocket/"+idClient);
+//var mySocket = new WebSocket("ws://localhost:8080/webSocket/"+idClient);
 
 pintarTabla();
 
@@ -12,32 +12,50 @@ pintarTabla();
 mySocket.onopen = function (e){}
 
 mySocket.onmessage = function (e){
-    let info = JSON.parse(e.data);
+    let info = JSON.parse(e.data)
     let mensaje = info.msg.text;
     let nombreUsuario = info.msg.usuario.name;
-    if(info.msg.tipo=="mensaje"){
-        $("#conversacion").append(nombreUsuario+": "+mensaje+"<br>");
-    }else if(info.msg.tipo=="notificacion"){
+    if(info.msg.tipo=="notificacion"){
         if(idClient==info.msg.destino){
             const user = obtenerCliente(idClient);
             let noti =` 
             <div class="nuevaNotificacion">`+
-            nombreUsuario +", ha empezado a seguirte!"+`
+                nombreUsuario +", ha empezado a seguirte!"+`
             </div>`
             $("#noti").append(noti);
         }
+    }else if(info.msg.tipo=="Venmensaje"){
+        if(idClient==info.msg.destino || info.msg.usuario.idClient == idClient){
+            $("#conversacion").append(nombreUsuario+": "+mensaje+"<br>");
+        }
+
     }
 }
 
-async function sendText() {
+async function sendText(idDestino) {
     const user = await obtenerCliente(idClient);
     console.log(user)
     let msg = {
         text: $("#message").val(),
         usuario: user,
-        tipo: "mensaje"
+        tipo: "Venmensaje",
+        destino: idDestino
     };
     mySocket.send(JSON.stringify({msg}));
+}
+
+async function abrirConversacion(idAmigoLista){
+    const compa = await obtenerCliente(idAmigoLista);
+    let conversa = `
+        <div class="ventanaConversacion">
+            <div id = "nameChat" class="cabeceraConversacion" onclick="accionConversacion()">
+             <a href="../perfilAmigo/PerfilAmigo.html">`+compa.name+`</a></div>
+            <div id= "conversacion" class="contenidoConversacion">
+                <input type="text" class="inputMensaje" id="message" placeholder="Escribe algo...">
+                <button class="enviarMensaje" onclick="sendText(`+idAmigoLista+`)">Enviar</button>
+            </div>
+        </div>`
+    $("#contenidoDer").append(conversa);
 }
 
 async function obtenerCliente(idCLiente){
@@ -77,6 +95,8 @@ function abrirMensajes(){
     }else{
         cerrarVentanas();
         document.getElementById("ventanaMessages").style.display="block";
+        document.getElementById("ventanaMessages").innerHTML="";
+        listarMensajes();
     }
 }
 
@@ -90,13 +110,15 @@ function abrirNotificaciones(){
     }
 }
 
-function abrirConversacion(){
+async function abrirConversacion(idAmigoLista){
+    const compa = await obtenerCliente(idAmigoLista);
     let conversa = `
         <div class="ventanaConversacion">
-            <div class="cabeceraConversacion" onclick="accionConversacion()"> <a href="../perfilAmigo/PerfilAmigo.html">Juan Arias</a></div>
+            <div id = "nameChat" class="cabeceraConversacion" onclick="accionConversacion()">
+             <a href="../perfilAmigo/PerfilAmigo.html">`+compa.name+`</a></div>
             <div id= "conversacion" class="contenidoConversacion">
                 <input type="text" class="inputMensaje" id="message" placeholder="Escribe algo...">
-                <button class="enviarMensaje" onclick="sendText()">Enviar</button>
+                <button class="enviarMensaje" onclick="sendText(`+idAmigoLista+`)">Enviar</button>
             </div>
         </div>`
     $("#contenidoDer").append(conversa);
@@ -260,6 +282,21 @@ function buscar(e){
         document.getElementById('ventanaBuscador').innerHTML = '';
         obtenerUsername();
         
+    }
+}
+
+/*------------Logica para listar los amigos -------------------- */
+
+async function listarMensajes(){
+    const user = await obtenerCliente(idClient);
+    for(i = 0 ; i<user.idAmigos.length-1; i++){
+        const compa = await obtenerCliente(user.idAmigos[i]);
+        let notiMensaje =`
+                <li class="mensaje" onclick="abrirConversacion(`+user.idAmigos[i]+`)">
+                    <h2 class="nombreMensaje">`+compa.name+`</h2>
+                    <p class="ultimoMensaje"> Hola! </p>
+                </li>`
+            $("#ventanaMessages").append(notiMensaje);
     }
 }
 

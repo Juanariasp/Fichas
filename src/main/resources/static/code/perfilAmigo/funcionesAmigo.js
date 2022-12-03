@@ -2,7 +2,8 @@
 let idClient = localStorage.getItem("idClient");
 let idAmigo = localStorage.getItem("idAmigo");
 
-var mySocket = new WebSocket("ws://localhost:8080/webSocket/"+idClient);
+var mySocket = new WebSocket("ws://140.238.155.132:8080/webSocket/"+idClient);
+//var mySocket = new WebSocket("ws://localhost:8080/webSocket/"+idClient);
 
 iniciar()
 
@@ -23,15 +24,11 @@ async function obtenerCliente(idCLiente){
 
 function agregarAmigo(){
     agregarAmigoBase();
+
     $.ajax({
         url:"/api/Client/saveAmigo/"+idClient+"/"+idAmigo+"/",
         success:function(respuesta){
             document.getElementById("agregarAmigo").style.display="none";
-            let btnEnviarMensaje = ` 
-            <button type="button"  id = "enviarMensaje" class="btn btn-dark" onclick="abrirBanMensaje()">
-                Enviar Mensaje
-            </button>`
-            $("#contenedorBotonAmigo").append(btnEnviarMensaje);
             enviarNotificacion();
         },
         error:function(xhr, respuesta){
@@ -55,19 +52,16 @@ async function enviarNotificacion() {
 
 mySocket.onmessage = function (e){
     let info = JSON.parse(e.data)
-    let origen = info.msg.origen;
     let mensaje = info.msg.text;
     let nombreUsuario = info.msg.usuario.name;
-    let destino = info.msg.destino;
     if(info.msg.tipo=="notificacion"){
         if(idClient==info.msg.destino){
             const user = obtenerCliente(idClient);
             let noti =` 
             <div class="nuevaNotificacion">`+
-            nombreUsuario +", ha empezado a seguirte!"+`
+                nombreUsuario +", ha empezado a seguirte!"+`
             </div>`
             $("#noti").append(noti);
-            console.log("Tienes una notificacion de: " + nombreUsuario);
         }
     }
 }
