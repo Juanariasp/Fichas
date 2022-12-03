@@ -1,0 +1,464 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+a, button{
+    cursor: pointer;
+}
+
+/*-------------E S T I L O   S C R O L L---------------*/
+#caramelos::-webkit-scrollbar, .ventanaEmergentes::-webkit-scrollbar, #ContenedorTabla::-webkit-scrollbar {
+    width: 5px;               
+    height: 5px;
+    background: #ccc;
+}
+
+#caramelos::-webkit-scrollbar-thumb, .ventanaEmergentes::-webkit-scrollbar-thumb, #ContenedorTabla::-webkit-scrollbar-thumb {
+    display: none;
+    border-radius: 4px;
+}
+
+#ContenedorTabla::-webkit-scrollbar {
+    display: none;
+} 
+
+
+
+/*-------------F U E N T E S---------------*/
+@font-face {
+    font-family: 'Franklin Gothic';
+    src: url('../../fonts/FRAHV-.TTF');
+    font-style: normal;
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'Franklin Gothic';
+    src: url('../../fonts/FRABK-.TTF');
+    font-style: normal;
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Franklin Gothic';
+    src: url('../../fonts/FRADMCN-.TTF');
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Segoe UI';
+    src: url('../../fonts/Segoe\ UI.ttf');
+    font-style: normal;
+    font-weight: 400;
+}
+
+/*------------- I N I C I O ---------------*/
+.inicio{
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("../../background/FondoMensajes.jpg");
+
+}
+
+#encabezado{
+    display: flex;
+    margin-left: 10%;
+    margin-right: 10%;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 2%;
+}
+
+.tituloPrincipal{
+    font-family: 'Franklin Gothic';
+    font-size: 55px;
+    color: white;
+}
+
+#search{
+    text-align: center;
+    width: 30%;
+    border-radius: 50px;
+    font-size: 18px;
+    font-family: 'Segoe UI';
+    height: 40px;
+    margin-right: 8%;
+}
+
+
+/*---- D I S E Ñ O  P A R A   E L   N A V ---*/
+#contenedorIconos a{
+    cursor: pointer;
+}
+
+.iconosnav{
+    height: 50px;
+    width: 50px;
+}
+
+.botonesnav{
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.5s;
+    border-style: none;
+    margin-right: 5px;
+}
+
+.botonesnav:hover{
+    transition: 0.5s;
+    box-shadow: rgba(246, 10, 10, 0.53) 0px 0px 6px 6px;
+}
+
+/* - - - -  DISEÑO VENTANAS EMERGENTES -  -  - */
+
+.ventanaEmergentes{
+    background-color: hsl(0, 0%, 96%);
+    width: 20%;
+    height: 20%;
+    display: none;
+    margin-left: 70%;
+    position: absolute;
+    border-radius: 10px;
+    margin-top: 10px;
+    overflow-y: auto;
+}
+
+/*Usuario*/
+/* - - - -  DISEÑO VENTANAS EMERGENTES -  -  - */
+
+.ventanaEmergentes{
+    background-color: hsl(0, 0%, 96%);
+    width: 20%;
+    height: 20%;
+    display: none;
+    margin-left: 70%;
+    position: absolute;
+    border-radius: 10px;
+    margin-top: 10px;
+    overflow-y: auto;
+}
+
+.nuevaNotificacion{
+    text-align: center;
+    font-family: 'Segoe UI';
+    font-size: 18px;
+    border-bottom: #08314D 2px solid;
+    transition: 0.3s;
+}
+
+.nuevaNotificacion:hover{
+    background-color: rgba(246, 10, 10, 0.53);
+    
+}
+
+
+
+/*Usuario*/
+#ventanaUser{
+    width: 120px;
+    height: 60px;
+    display: none;
+    font-size: 18px;
+    margin-left: 75%;
+    margin-top: 10px;
+    padding-top: 5px;
+    position: absolute;
+    text-align: center;
+    border-radius: 10px;
+    font-family: 'Segoe UI';
+    background-color: hsl(0, 0%, 96%);
+}
+
+#ventanaUser a{
+    text-decoration: none;
+    color: black;
+}
+
+/*Notificaciones*/
+
+
+/*Mensajes*/
+.nombreMensaje{
+    font-family: 'Franklin Gothic';
+    font-size: 20px;
+    color: #08314D;
+}
+
+.mensaje{
+    padding-left: 10px;
+    padding-top: 10px;
+    list-style: none;
+    transition: 0.3s;
+}
+
+.ultimoMensaje{
+    font-family: 'Segoe UI';
+}
+
+.mensaje:hover{
+    background-color: rgba(246, 10, 10, 0.53);
+    transition: 0.3s;
+    
+    cursor: pointer;
+}
+
+/*DISEÑO PARA LA VENTANA DE CONVERSACION*/
+
+.ventanaConversacion{
+    position: absolute;
+    background-color: white;
+    border-radius: 10px 10px 0px 0px;
+    bottom: 1px;
+    right: 10px;
+}
+
+.cabeceraConversacion{
+    border-radius: 10px 10px 0px 0px;
+    font-family: 'Franklin Gothic';
+    font-size: 30px;
+    text-align: center;
+    height: 40px;
+    width: 260px;
+    border-bottom: solid 1px #08314D;
+    cursor: pointer;
+}
+
+.cabeceraConversacion a{
+    text-decoration: none;
+    color: #08314D;
+    transition: 0.5s;
+
+}
+
+.cabeceraConversacion a:hover{
+    color: rgba(51, 101, 227, 0.854);
+    transition: 0.5s;
+
+}
+
+.contenidoConversacion{
+    display: block;
+    border-radius: 10px 10px 0px 0px;
+    overflow-y: auto;
+    height: 300px;
+    width: 260px;
+}
+
+.inputMensaje{
+    position: absolute;
+    border-radius: 10px;
+    margin-left: 5px;
+    height: 30px;
+    width: 160px;
+    bottom: 10px;
+    font-size: 18px;
+}
+
+.enviarMensaje{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    height: 30px;
+    width: 70px;
+    border-radius: 10px;
+}
+
+
+/*---------D I S E Ñ O  PARA EL B U S C A D O R----------*/
+
+
+
+#ventanaBuscador{
+    width: 24%;
+    height: 20%;
+    border-radius: 10px;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: none;
+    overflow-y: auto;
+}
+
+.usuarioEncontrado{  
+    height: 55px;
+    border-bottom: #08314D 2px solid;
+    padding-left: 10px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+.usuarioEncontrado:hover{
+    background-color: #08314d41;
+    transition: 0.3s;
+
+}
+
+.nomUsuarioEnc{
+    font-family: 'Franklin Gothic';
+    font-size: 17px;
+}
+
+.usuarioEncontrado h5{
+    font-family: 'Segoe UI';
+}
+
+
+/* - - - - - DISEÑO PRINCIPAL - - - - - - */
+
+.bandejaEntrada{
+    margin: 5% 10% 0% 10%;    
+}
+
+.conteEntrada{
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+#contenidoBoton{
+    color: white;
+    font-family: 'Franklin Gothic';
+}
+
+#contenidoBoton h3{
+    font-family: 'Segoe UI';
+    font-size: 22px;
+    font-weight: 300;
+}
+
+.conteEntrada h4{
+    font-family: 'Franklin Gothic';
+    font-size: 25px;
+    color: white;
+}
+
+.btnAbrir{
+    height: 2.7em;
+    width: 12em;
+    color: white;
+    margin-top: 1em;
+    font-size: 1.2em;
+    border-radius: 50px;
+    border: solid 2px white;
+    background-color: #08314D;
+    transition: 0.5s;
+    font-family: 'Segoe UI';
+}
+
+
+.btnAbrir:hover{
+    transition: 0.5s;
+    background-color: #E72028;
+    border: solid 2px #E72028;
+    box-shadow: rgba(246, 10, 10, 0.53) 0em 0em 5px 5px;
+}
+
+#caramelos{
+    margin-top: 20px;
+    height: 330px;
+    overflow-x: auto;
+}
+
+#contenidoIzq h4{
+    margin-top: 20px;
+}
+
+.filaCaramelos{
+    height: 300px;
+   display: flex;
+    margin-top: 10px;
+    
+}
+
+/*DISEÑO PARA LAS CARTAS*/
+
+.cardbox{
+    float: left;
+    border-radius: 10px;
+    width: 14rem;
+    perspective: 800px;    
+    margin-right: 10px;
+    perspective: 1000px;
+}
+
+
+.cardbox img{
+    border-radius: 10px;
+    width: 14rem;
+}
+
+.cardbody h2{
+    font-family: 'Franklin Gothic';
+    text-align: center;
+    font-size: 22px;
+}
+
+.cardbody p{
+    text-align: center;
+    font-family: 'Segoe UI';
+    font-size: 16px;
+}
+
+/* PARA EL MOVIMIENTO */
+
+.back{
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    height: 280px;
+    width: 14rem;
+}
+
+.cardbox:hover .card{
+    transform: rotateY(180deg);
+}
+
+.card{
+    transform-style: preserve-3d;
+    transition: all 0.5s linear;
+}
+
+.cardbody {
+    position: absolute;
+    backface-visibility: hidden;
+  }
+
+.cardbody .back{
+    transform: rotateY(180deg);
+}
+
+/*-----------  DISEÑO PARA LA TABLA  ------------*/
+
+#ContenedorTabla{
+    height: 30Rem;
+    width: 100%;
+    overflow-y: auto;
+    padding-left: 50px;
+}
+
+#tablaFichas{
+    text-align: center;
+    width: 100%;
+    color: white;
+    border-collapse: collapse;
+}
+
+#tablaFichas tr th{
+    font-family: 'Franklin Gothic';
+}
+
+.fila td{
+    font-family: 'Segoe UI';
+}
+
+.fila:hover{
+    background-color: rgba(90, 140, 46, 0.56);
+    transition: 0.3s;
+}
+

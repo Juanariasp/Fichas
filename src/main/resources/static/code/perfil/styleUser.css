@@ -1,0 +1,276 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: url('../../background/FondoPerfil.jpg') center center no-repeat;
+  background-size: cover;
+}
+
+.misCaramelos{
+  color: black;
+}
+
+h2, div{
+  color: aliceblue;
+}
+
+#repetidas::-webkit-scrollbar, #contenidoFichas::-webkit-scrollbar{
+  width: 5px;               
+  height: 5px;
+  background: #ccc;
+}
+
+#repetidas{
+  padding-left: 87px;
+}
+
+#btnRepetidas{
+  margin-left: 50px;
+  display: block;
+}
+
+.back h1{
+  transform: rotateY(180deg);
+  margin-top: 110px;
+  color: black;
+}
+
+#contenidoFichas{
+  display: none;
+  overflow-y: auto;
+  padding-top: 30px;
+  padding-left: 50px;
+  border-radius: 10px;
+  top: 10%;
+  width: 65%;
+  right: 4.6%;
+  height: 40rem;
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+}
+
+.btnEquipos{
+  width: 100%;
+  padding-left: 35%;
+  height: 5.55rem;
+  display: flex;
+  border: none;
+  font-size: 20px;
+  align-items: center;
+  text-align:center;
+}
+
+.btnEquipos p {
+  text-align:center;
+}
+
+.btnEquipos:hover{
+  transition: 0.1s;
+  background-color: #E72028;
+  border: solid 2px #E72028;
+  color: white;
+  box-shadow: rgba(231, 32, 40, 0.53) 0em 0em 2px 2px;
+}
+
+.principal{
+  padding-top: 100px;
+}
+
+#caramelos{
+  font-size: 23px;
+  padding-top: 100px;
+  line-height: 1.0; 
+}
+.descripcion{
+  padding-top: 35px;
+}
+#tarjetas{
+  color: black;
+}
+
+.circular{
+  display: none;
+  height: 100px;
+  width: 100px;
+  position: relative;
+  margin: 0 auto;
+}
+.circular .inner, .circular .outer, .circular .circle{
+  position: absolute;
+  z-index: 6;
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  box-shadow: inset 0 1px 0 rgba(0,0,0,0.2);
+}
+.circular .inner{
+  top: 50%;
+  left: 50%;
+  height: 80px;
+  width: 80px;
+  margin: -40px 0 0 -40px;
+  background-color: #dde6f0;
+  border-radius: 100%;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+}
+.circular .circle{
+  z-index: 1;
+  box-shadow: none;
+}
+.circular .numb{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  font-size: 22px;
+  font-weight: 500;
+  color: #a00025;
+}
+.circular .bar{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #fff;
+  border-radius: 100%;
+  clip: rect(0px, 100px, 100px, 50px);
+}
+.circle .bar .progress{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  clip: rect(0px, 50px, 100px, 0px);
+}
+.circle .bar .progress, .dot span{
+  background: #a00025;
+}
+.circle .left .progress{
+  z-index: 1;
+  animation: left 4s linear both;
+}
+@keyframes left {
+  100%{
+    transform: rotate(180deg);
+  }
+}
+.circle .right{
+  z-index: 3;
+  transform: rotate(180deg);
+}
+.circle .right .progress{
+  animation: right 4s linear both;
+  animation-delay: 4s;
+}
+@keyframes right {
+  100%{
+    transform: rotate(180deg);
+  }
+}
+.circle .dot{
+  z-index: 2;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 50%;
+  height: 10px;
+  margin-top: -5px;
+  animation: dot 8s linear both;
+  transform-origin: 0% 50%;
+}
+.circle .dot span {
+  position: absolute;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+}
+@keyframes dot{
+  0% {
+    transform: rotate(-90deg);
+  }
+  50% {
+    transform: rotate(90deg);
+    z-index: 4;
+  }
+  100% {
+    transform: rotate(270deg);
+    z-index: 4;
+  }
+}
+
+/*DISEÑO PARA LAS CARTAS*/
+
+.cardbox{
+  float: left;
+  border-radius: 11px;
+  width: 13rem;
+  height: 280px;
+  perspective: 800px;    
+  margin-right: 10px;
+  perspective: 1000px;
+}
+
+
+.cardbox img{
+  border-radius: 10px;
+  width: 13rem;
+  
+}
+
+.cardbody h2{
+  font-family: 'Franklin Gothic';
+  text-align: center;
+  font-size: 22px;
+}
+
+.cardbody p{
+  text-align: center;
+  font-family: 'Segoe UI';
+  font-size: 16px;
+}
+
+/* PARA EL MOVIMIENTO */
+
+.back{
+  text-align: center;
+  background-color: white;
+  border-radius: 10px;
+  height: 280px;
+  width: 13rem;
+}
+
+.cardbox:hover .card{
+  transform: rotateY(180deg);
+}
+
+.card{
+  transform-style: preserve-3d;
+  transition: all 0.5s linear;
+}
+
+.cardbody {
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.cardbody .back{
+  transform: rotateY(180deg);
+}

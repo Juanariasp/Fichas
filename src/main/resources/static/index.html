@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=s, initial-scale=1.0">
+    <link rel="stylesheet" href="code/registro/styleRegister.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="code/registro/funcionesRegister.js"></script>
+    <title>Inicio</title>
+</head>
+<body>
+<div id="principal">
+    <h1 id="tituloPrincipal" >Fichasbook</h1>
+    <div class="registro">
+        <h3 class="iniciarSesion">Iniciar Sesión</h3>
+        <input class = "inputInicio" type="text" id="nombre" placeholder="Nombre">
+        <input class = "inputInicio" type="text" id="password" placeholder="Contraseña">
+        <button class="signup" onclick="iniciarSesion()">Sign up</button>
+        <h5>¿Aún no te has registrado? <a onclick="limpiarPantalla()">Hazlo ahora</a></h5>
+    </div>
+</div>
+</body>
+</html>
