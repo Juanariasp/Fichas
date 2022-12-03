@@ -3,8 +3,8 @@ var unaFicha;
 
 let idClient = localStorage.getItem("idClient");
 
-var mySocket = new WebSocket("ws://140.238.155.132:8080/webSocket/"+idClient);
-//var mySocket = new WebSocket("ws://localhost:8080/webSocket/"+idClient);
+//var mySocket = new WebSocket("ws://140.238.155.132:8080/webSocket/"+idClient);
+var mySocket = new WebSocket("ws://localhost:8080/webSocket/"+idClient);
 
 pintarTabla();
 
@@ -20,13 +20,22 @@ mySocket.onmessage = function (e){
             const user = obtenerCliente(idClient);
             let noti =` 
             <div class="nuevaNotificacion">`+
-                nombreUsuario +", ha empezado a seguirte!"+`
+                nombreUsuario + mensaje +`
             </div>`
             $("#noti").append(noti);
         }
     }else if(info.msg.tipo=="Venmensaje"){
-        if(idClient==info.msg.destino || info.msg.usuario.idClient == idClient){
-            $("#conversacion").append(nombreUsuario+": "+mensaje+"<br>");
+        if(idClient==info.msg.destino){
+            let messagesend = `<div id="contMensajeAmigo">`
+            +mensaje+
+            `</div>`;
+            $("#conversacion").append(messagesend);
+        }
+        if( info.msg.usuario.idClient == idClient){
+            let messagesend = `<div id="contMensaje">`
+                                    +mensaje+
+                                `</div>`;
+            $("#conversacion").append(messagesend);
         }
 
     }
@@ -34,7 +43,6 @@ mySocket.onmessage = function (e){
 
 async function sendText(idDestino) {
     const user = await obtenerCliente(idClient);
-    console.log(user)
     let msg = {
         text: $("#message").val(),
         usuario: user,
@@ -56,6 +64,7 @@ async function abrirConversacion(idAmigoLista){
             </div>
         </div>`
     $("#contenidoDer").append(conversa);
+    cerrarVentanas();
 }
 
 async function obtenerCliente(idCLiente){
@@ -108,20 +117,6 @@ function abrirNotificaciones(){
         cerrarVentanas();
         document.getElementById("ventanaNoti").style.display="block";
     }
-}
-
-async function abrirConversacion(idAmigoLista){
-    const compa = await obtenerCliente(idAmigoLista);
-    let conversa = `
-        <div class="ventanaConversacion">
-            <div id = "nameChat" class="cabeceraConversacion" onclick="accionConversacion()">
-             <a href="../perfilAmigo/PerfilAmigo.html">`+compa.name+`</a></div>
-            <div id= "conversacion" class="contenidoConversacion">
-                <input type="text" class="inputMensaje" id="message" placeholder="Escribe algo...">
-                <button class="enviarMensaje" onclick="sendText(`+idAmigoLista+`)">Enviar</button>
-            </div>
-        </div>`
-    $("#contenidoDer").append(conversa);
 }
 
 function accionConversacion(){
@@ -252,12 +247,14 @@ function obtenerUsername(){
         datatype:"JSON",
         success:function(respuesta){
             for(i = 0; i<respuesta.length;i++){
-                let infoVentana = `
-                <div id="`+respuesta[i].idClient+`" onclick="abrirPerAmigo(`+respuesta[i].idClient+`)" class="usuarioEncontrado">
-                <h1 class="nomUsuarioEnc">`+ respuesta[i].name+`</h1>
-                <h5>Fichas Encontradas: `+respuesta[i].fichas.length+`</h5>
-                </div>`
-                $("#ventanaBuscador").append(infoVentana);
+                if(respuesta[i].idClient!=idClient){
+                    let infoVentana = `
+                    <div id="`+respuesta[i].idClient+`" onclick="abrirPerAmigo(`+respuesta[i].idClient+`)" class="usuarioEncontrado">
+                    <h1 class="nomUsuarioEnc">`+ respuesta[i].name+`</h1>
+                    <h5>Fichas Encontradas: `+respuesta[i].fichas.length+`</h5>
+                    </div>`
+                    $("#ventanaBuscador").append(infoVentana);
+                }
             }
             
         },

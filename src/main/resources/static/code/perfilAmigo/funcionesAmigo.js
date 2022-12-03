@@ -2,8 +2,8 @@
 let idClient = localStorage.getItem("idClient");
 let idAmigo = localStorage.getItem("idAmigo");
 
-var mySocket = new WebSocket("ws://140.238.155.132:8080/webSocket/"+idClient);
-//var mySocket = new WebSocket("ws://localhost:8080/webSocket/"+idClient);
+//var mySocket = new WebSocket("ws://140.238.155.132:8080/webSocket/"+idClient);
+var mySocket = new WebSocket("ws://localhost:8080/webSocket/"+idClient);
 
 iniciar()
 
@@ -24,12 +24,11 @@ async function obtenerCliente(idCLiente){
 
 function agregarAmigo(){
     agregarAmigoBase();
-
     $.ajax({
         url:"/api/Client/saveAmigo/"+idClient+"/"+idAmigo+"/",
         success:function(respuesta){
             document.getElementById("agregarAmigo").style.display="none";
-            enviarNotificacion();
+            enviarNotificacion(", Te ha empezado a seguir!");
         },
         error:function(xhr, respuesta){
             alert("Error de peticion")
@@ -38,11 +37,11 @@ function agregarAmigo(){
 }
 
 
-async function enviarNotificacion() {
+async function enviarNotificacion(texto) {
     const user = await obtenerCliente(idClient);
     let msg = {
         origen: idClient,
-        text: ", Te ha empezado a seguir!",
+        text: texto,
         usuario: user,
         tipo: "notificacion",
         destino: idAmigo
@@ -69,8 +68,14 @@ mySocket.onmessage = function (e){
 /*---------------Logica para cargar la pagina--------------------*/
 
 async function iniciar() {
-    cliente = await obtenerAmigo();
-    document.getElementById("nombre").innerHTML = cliente.name;
+    cliente = await obtenerCliente(idClient);
+    amigo = await obtenerAmigo();
+    document.getElementById("nombre").innerHTML = amigo.name;
+    for(let i = 0; i <= cliente.idAmigos.length;i++){
+        if(cliente.idAmigos[i]==idAmigo){
+            document.getElementById("agregarAmigo").style.display = "none";
+        }
+    }
 }
 
 function agregarAmigoBase(){
@@ -143,6 +148,7 @@ async function obtenerRepetidas() {
 }
 
 function pedirFicha(){
+    enviarNotificacion(", desea cambiar un caramelo !!");
     document.getElementById('repetidas').innerHTML = '';
 }
 

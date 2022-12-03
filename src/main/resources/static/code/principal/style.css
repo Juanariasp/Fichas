@@ -462,3 +462,26 @@ a, button{
     transition: 0.3s;
 }
 
+
+#contMensaje{
+    font-family: 'Segoe UI';
+    padding-left: 10px;
+    background-color: #E72028;
+    width: 50%;
+    border-radius: 20px;
+    color: white;
+    margin-top: 5px;
+    margin-left: 45%;
+}
+
+#contMensajeAmigo{
+    font-family: 'Segoe UI';
+    margin-top: 5px;
+    padding-left: 10px;
+    background-color: #08314D ;
+    width: 50%;
+    border-radius: 20px;
+    color: white;
+    margin-left: 5px;
+
+}
