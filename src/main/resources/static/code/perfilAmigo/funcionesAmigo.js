@@ -2,8 +2,8 @@
 let idClient = localStorage.getItem("idClient");
 let idAmigo = localStorage.getItem("idAmigo");
 
-//var mySocket = new WebSocket("ws://140.238.155.132:8080/webSocket/"+idClient);
-var mySocket = new WebSocket("ws://localhost:8080/webSocket/"+idClient);
+var mySocket = new WebSocket("ws://140.238.155.132:8080/webSocket/"+idClient);
+//var mySocket = new WebSocket("ws://localhost:8080/webSocket/"+idClient);
 
 iniciar()
 
